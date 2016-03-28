@@ -110,7 +110,13 @@ containers () {
 	done
 	read -p "Enter options seperated by comma..(eg. 101,102) (0 to go to main menu).." OPTION
 	case "$OPTION" in
-		"0") main_menu
+		"0") main_menu;;
+		"101") final_list+=" 101.Docker"
+		containers
+		;;
+		"102") final_list+=" 102.Vagrant"
+		containers
+		;;
 	esac
 }
 
@@ -119,11 +125,19 @@ oh_my_zsh () {
 	echo "111.OhMyZsh"
 	read -p "Enter option(eg. 111) (0 to go to main menu).." OPTION
 	case "$OPTION" in
-		"0") main_menu
+		"0") main_menu;;
+		"111") final_list+=" 111.OhMyZsh"
+			main_menu
+			;;
 	esac
 }
 
 main_menu () {
+	echo "Current List: "
+	for i in $final_list; do
+		echo -e $i
+	done
+	echo " "
 	echo "1. Programming Languages"
 	echo "2. Frameworks"
 	echo "3. Text Editors"
@@ -165,4 +179,5 @@ main_menu () {
 }
 
 initialize
+final_list=""
 main_menu
