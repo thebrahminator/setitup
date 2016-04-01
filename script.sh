@@ -1,9 +1,21 @@
 initialize () {
-	cat /etc/*-release | grep 'DISTRIB_DESCRIPTION' | grep '14.04'
+	clear
+	os_release=$(check_release)
+	if [ "$os_release" == "14.04" ]; then
+		echo "OS Release Check Done.."
+	else
+		echo "You need Ubuntu 14.04.."
+		exit
+	fi
+}
+
+check_release () {
+	cat /etc/*-release | grep 'DISTRIB_DESCRIPTION' | grep '14.04' | cut -c 29,30,31,32,33
 }
 
 prog_lang () {
 	clear
+	current_list
 	echo -e "Programming Languages\n"
 	for i in "11.Java\n12.Ruby\n13.Php\n14.Rust"; do
 		echo -e $i
@@ -23,11 +35,15 @@ prog_lang () {
 		"14") final_list+=" 14.Rust"
 		prog_lang
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			prog_lang
+		;;
 	esac
 }		
 
 frameworks () {
 	clear
+	current_list
 	echo -e "Frameworks\n"
 	for i in "21.Rails\n22.Laravel\n23.Django\n24.Node.js\n25.Meteor\n26.Phoenix\n"; do
 		echo -e $i
@@ -53,11 +69,15 @@ frameworks () {
 		"26") final_list+=" 26.Phoenix"
 		frameworks
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			frameworks
+		;;
 	esac
 }
 
 text_editors () {
 	clear
+	current_list
 	for i in "31.Vim\n32.GNU/Emacs\n33.Sublime\n34.Atom\n35.Komodo\n36.Brackets"; do
 		echo -e $i
 	done
@@ -82,11 +102,15 @@ text_editors () {
 		"36") final_list+=" 36.Brackets"
 		text_editors
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			text_editors
+		;;
 	esac	
 }
 
 version_control () {
 	clear
+	current_list
 	for i in "41.Git\n42.Mercurial\n43.SVN"; do
 		echo -e $i
 	done
@@ -102,11 +126,15 @@ version_control () {
 		"43") final_list+=" 43.SVN"
 		version_control
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			version_control
+		;;
 	esac
 }
 
 terminals () {
 	clear
+	current_list
 	for i in "51.Terminator\n52.Tilda\n53.Guake\n54.Yakuake\n55.Konsole"; do
 		echo -e $i
 	done
@@ -128,11 +156,15 @@ terminals () {
 		"55") final_list+=" 55.Konsole"
 		terminals
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			terminals
+		;;
 	esac
 }
 
 databases () {
 	clear
+	current_list
 	for i in "61.MySql\n62.Postgresql\n63.Mongodb\n64.Redis"; do
 		echo -e $i		
 	done
@@ -151,11 +183,15 @@ databases () {
 		"64") final_list+=" 64.Redis"
 		databases
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+		databases
+		;;
 	esac
 }
 
 shell () {
 	clear 
+	current_list
 	for i in "71.Zsh\n72.Tcsh\n73.Kcsh"; do
 		echo -e $i
 	done
@@ -171,11 +207,15 @@ shell () {
 		"73") final_list+=" 73.Kcsh"
 		shell
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+		shell
+		;;
 	esac
 }
 
 other_tools () {
 	clear
+	current_list
 	for i in "81.Gimp\n82.ImageMagick\n83.ffmpeg"; do
 		echo -e $i
 	done
@@ -191,11 +231,15 @@ other_tools () {
 		"83") final_list+=" 83.ffmpeg"
 		other_tools
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+			other_tools
+		;;
 	esac
 }
 
 browsers () {
 	clear
+	current_list
 	for i in "91.Firefox-dev\n92.GoogleChrome\n93.Chromium"; do
 		echo -e $i
 	done
@@ -212,11 +256,16 @@ browsers () {
 		"93") final_list+=" Chromium"
 		browsers
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+		browsers
+		;;
 	esac
+	current_list
 }
 
 containers () {
 	clear
+	current_list
 	for i in "101.Docker\n102.Vagrant"; do 
 		echo -e $i
 	done
@@ -229,11 +278,15 @@ containers () {
 		"102") final_list+=" 102.Vagrant"
 		containers
 		;;
+		*) echo "Wrong option.. Enter a valid one"
+		containers
+		;;
 	esac
 }
 
 oh_my_zsh () {
 	clear
+	current_list
 	echo "111.OhMyZsh"
 	read -p "Enter option(eg. 111) (0 to go to main menu).." OPTION
 	case "$OPTION" in
@@ -241,6 +294,9 @@ oh_my_zsh () {
 		"111") final_list+=" 111.OhMyZsh"
 			main_menu
 			;;
+		*) echo "Wrong option.. Enter a valid one"
+		oh_my_zsh
+		;;	
 	esac
 }
 
@@ -290,26 +346,23 @@ start_install () {
 		elif [ "$i" == "71.Zsh"]; then
 			sudo apt-get update
 			sudo apt-get install zsh
-		# elif [ "$i" == "82.ImageMagick"]; then
-		# 	sudo -i
-		# 	cd
-		# 	apt-get install build-essential checkinstall && apt-get build-dep imagemagick -y
-		# 	wget http://www.imagemagick.org/download/ImageMagick-6.9.3-7.tar.gz
-		# 	tar xzvf ImageMagick-6.9.3-7.tar.gz
-		# 	cd ImageMagick-6.9.3-7/
-		# 	./configure --prefix=/opt/imagemagick-6.9 && make
-		# 	checkinstall
-		# 	exit
 		fi
 		main_menu
 	done
 }
 
+current_list () {
+	if [[ -n "$final_list" ]]; then
+		echo "Current List: "
+		for i in $final_list; do
+			echo -e $i
+		done
+	fi
+}
+
 main_menu () {
-	echo "Current List: "
-	for i in $final_list; do
-		echo -e $i
-	done
+	clear
+	current_list
 	echo " "
 	echo "1. Programming Languages"
 	echo "2. Frameworks"
@@ -346,7 +399,14 @@ main_menu () {
 		;;
 		"11") oh_my_zsh
 		;;
-		"00") start_install
+		"00")
+			if [[ -n "$final_list" ]]; then
+				start_install
+			else
+				clear
+				echo "#####Add some software to start installing..######"
+				main_menu
+			fi
 		;;
 		*) echo "Wrong option.. Enter a valid one"
 		;;
@@ -356,3 +416,5 @@ main_menu () {
 initialize
 final_list=""
 main_menu
+
+# echo ${var//12.sss/}
