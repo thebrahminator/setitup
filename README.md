@@ -2,7 +2,8 @@
 
 Easily set up you developer machine.
 Just run the script.sh, add the softwares that needs to be installed, sit back and relax. Let the script do the work.
-Whenever i do a fresh install of ubuntu, it was not easy for me to turn it into my dev machine. I had to visit several websites, copy all those lines of commands to install my required softwares. Now, i just run the script, add the softwares to install and let the code do the work.
+
+Initial code was developed only for Ubuntu machines. Since, Macintosh machines do not have the provision of apt-get, I am trying to develop a version for the Mac. Set up your Mac, each time you get it, or format it by mistake. 
 
 Development is currently in early stage. Feel free to take a look at the code. Contributions are welcome.
 
