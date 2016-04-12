@@ -4,18 +4,24 @@ initialize () {
 	if [ "$MAJOR_MAC_VERSION" == "10.10" ]; then
 		echo "OS Release Check Done.. You are running $os_release and it's perfect for installation"
 	else
-		echo "You need Ubuntu 14.04.."
+		echo "You need Mac OS X 10.10 and above"
 		exit
 	fi
 }
 
-check_release () {
-	cat /etc/*-release | grep 'DISTRIB_DESCRIPTION' | grep '14.04' | cut -c 29,30,31,32,33
-}
 
 brew (){
 	echo "Brew is the main tool that is required for setting up an environment in your Mac."
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	#echo "Brew Successfully Installed"
+	which -s brew
+	if [[ $? != 0 ]] ; then
+		 # Install Homebrew
+		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	else
+		#brew update
+		echo "Brew is already installed in this machine"
+	fi
 }
 prog_lang () {
 	clear
@@ -366,6 +372,7 @@ current_list () {
 
 main_menu () {
 	clear
+	brew
 	current_list
 	echo " "
 	echo "1. Programming Languages"
@@ -379,6 +386,7 @@ main_menu () {
 	echo "9. Browsers"
 	echo "10. Container"	
 	echo "11. OhMyZsh"
+	echo "12. Exit"
 	read -p "Enter your choice[1-10]..., 00 to start installing.. " CHOICE
 	case "$CHOICE" in
 		"1") prog_lang
@@ -403,6 +411,9 @@ main_menu () {
 		;;
 		"11") oh_my_zsh
 		;;
+		"12")
+			exit
+			;;
 		"00")
 			if [[ -n "$final_list" ]]; then
 				start_install
