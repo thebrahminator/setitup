@@ -1,8 +1,8 @@
 initialize () {
 	clear
-	os_release=$(check_release)
-	if [ "$os_release" == "14.04" ]; then
-		echo "OS Release Check Done.."
+	MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
+	if [ "$MAJOR_MAC_VERSION" == "10.10" ]; then
+		echo "OS Release Check Done.. You are running $os_release and it's perfect for installation"
 	else
 		echo "You need Ubuntu 14.04.."
 		exit
@@ -13,6 +13,10 @@ check_release () {
 	cat /etc/*-release | grep 'DISTRIB_DESCRIPTION' | grep '14.04' | cut -c 29,30,31,32,33
 }
 
+brew (){
+	echo "Brew is the main tool that is required for setting up an environment in your Mac."
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
 prog_lang () {
 	clear
 	current_list
@@ -303,8 +307,8 @@ oh_my_zsh () {
 start_install () {
 	clear
 	echo "List of softwares to be installed: "
-	mkdir -p setitup-files
-	cd setitup-files
+	mkdir -p files
+	cd files
 	for i in $final_list; do
 		echo -e $i
 		if [ "$i" == "14.Rust" ]; then
