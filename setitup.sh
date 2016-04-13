@@ -2,7 +2,7 @@ initialize () {
 	clear
 	MAJOR_MAC_VERSION=$(sw_vers -productVersion | awk -F '.' '{print $1 "." $2}')
 	if [ "$MAJOR_MAC_VERSION" == "10.10" ]; then
-		echo "OS Release Check Done.. You are running $os_release and it's perfect for installation"
+		echo "OS Release Check Done.. You are running $MAJOR_MAC_VERSION and it's perfect for installation"
 	else
 		echo "You need Mac OS X 10.10 and above"
 		exit
@@ -16,11 +16,16 @@ brew (){
 	#echo "Brew Successfully Installed"
 	which -s brew
 	if [[ $? != 0 ]] ; then
-		 # Install Homebrew
+		# Install Homebrew
 		ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	else
 		#brew update
 		echo "Brew is already installed in this machine"
+		##		echo "Do you want to perform an update?"
+		#		read check
+		#		if [ "$check" == "yes" ]; then 
+		#			brew update
+		#		fi	
 	fi
 }
 prog_lang () {
@@ -33,22 +38,22 @@ prog_lang () {
 	read -p "Enter options seperated by comma..(eg. 11,12) (0 to go to main menu).. " OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"11") final_list+=" 11.Java"
+	"11") final_list+=" 11.Java"
 		prog_lang
 		;;
-		"12") final_list+=" 12.Ruby"
+	"12") final_list+=" 12.Ruby"
 		prog_lang
 		;;
-		"13") final_list+=" 13.Php"
+	"13") final_list+=" 13.Php"
 		prog_lang
 		;;
-		"14") final_list+=" 14.Rust"
+	"14") final_list+=" 14.Rust"
 		prog_lang
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			prog_lang
+	*) echo "Wrong option.. Enter a valid one"
+		prog_lang
 		;;
-	esac
+esac
 }		
 
 frameworks () {
@@ -61,28 +66,28 @@ frameworks () {
 	read -p "Enter options seperated by comma..(eg. 21,22) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"21") final_list+=" 21.Rails"
+	"21") final_list+=" 21.Rails"
 		frameworks
 		;;
-		"22") final_list+=" 22.Laravel"
+	"22") final_list+=" 22.Laravel"
 		frameworks
 		;;
-		"23") final_list+=" 23.Django"
+	"23") final_list+=" 23.Django"
 		frameworks
 		;;
-		"24") final_list+=" 24.Node.js"
+	"24") final_list+=" 24.Node.js"
 		frameworks
 		;;
-		"25") final_list+=" 25.Meteor"
+	"25") final_list+=" 25.Meteor"
 		frameworks
 		;;
-		"26") final_list+=" 26.Phoenix"
+	"26") final_list+=" 26.Phoenix"
 		frameworks
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			frameworks
+	*) echo "Wrong option.. Enter a valid one"
+		frameworks
 		;;
-	esac
+esac
 }
 
 text_editors () {
@@ -94,28 +99,28 @@ text_editors () {
 	read -p "Enter options seperated by comma..(eg. 31,32) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"31") final_list+=" 31.Vim"
+	"31") final_list+=" 31.Vim"
 		text_editors
 		;;
-		"32") final_list+=" 32.GNU/Emacs"
+	"32") final_list+=" 32.GNU/Emacs"
 		text_editors
 		;;
-		"33") final_list+=" 33.Sublime"
+	"33") final_list+=" 33.Sublime"
 		text_editors
 		;;
-		"34") final_list+=" 34.Atom"
+	"34") final_list+=" 34.Atom"
 		text_editors
 		;;
-		"35") final_list+=" 35.Komodo"
+	"35") final_list+=" 35.Komodo"
 		text_editors
 		;;
-		"36") final_list+=" 36.Brackets"
+	"36") final_list+=" 36.Brackets"
 		text_editors
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			text_editors
+	*) echo "Wrong option.. Enter a valid one"
+		text_editors
 		;;
-	esac	
+esac	
 }
 
 version_control () {
@@ -127,19 +132,19 @@ version_control () {
 	read -p "Enter options seperated by comma..(eg. 41,42) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"41") final_list+=" 41.Git"
+	"41") final_list+=" 41.Git"
 		version_control
 		;;
-		"42") final_list+=" 42.Mercurial"
+	"42") final_list+=" 42.Mercurial"
 		version_control
 		;;
-		"43") final_list+=" 43.SVN"
+	"43") final_list+=" 43.SVN"
 		version_control
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			version_control
+	*) echo "Wrong option.. Enter a valid one"
+		version_control
 		;;
-	esac
+esac
 }
 
 terminals () {
@@ -151,25 +156,25 @@ terminals () {
 	read -p "Enter options seperated by comma..(eg. 51,52) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"51") final_list+=" 51.Terminator"
+	"51") final_list+=" 51.Terminator"
 		terminals
 		;;
-		"52") final_list+=" 52.Tilda"
+	"52") final_list+=" 52.Tilda"
 		terminals
 		;;
-		"53") final_list+=" 53.Guake"
+	"53") final_list+=" 53.Guake"
 		terminals
 		;;
-		"54") final_list+=" 54.Yakuake"
+	"54") final_list+=" 54.Yakuake"
 		terminals
 		;;
-		"55") final_list+=" 55.Konsole"
+	"55") final_list+=" 55.Konsole"
 		terminals
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			terminals
+	*) echo "Wrong option.. Enter a valid one"
+		terminals
 		;;
-	esac
+esac
 }
 
 databases () {
@@ -181,22 +186,22 @@ databases () {
 	read -p "Enter options seperated by comma..(eg. 61,62) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"61") final_list+=" 61.MySql"
+	"61") final_list+=" 61.MySql"
 		databases
 		;;
-		"62") final_list+=" 62.Postgresql"
+	"62") final_list+=" 62.Postgresql"
 		databases
 		;;
-		"63") final_list+=" 63.Mongodb"
+	"63") final_list+=" 63.Mongodb"
 		databases
 		;;
-		"64") final_list+=" 64.Redis"
+	"64") final_list+=" 64.Redis"
 		databases
 		;;
-		*) echo "Wrong option.. Enter a valid one"
+	*) echo "Wrong option.. Enter a valid one"
 		databases
 		;;
-	esac
+esac
 }
 
 shell () {
@@ -208,19 +213,19 @@ shell () {
 	read -p "Enter options seperated by comma..(eg. 71,72) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"71") final_list+=" 71.Zsh"
+	"71") final_list+=" 71.Zsh"
 		shell
 		;;
-		"72") final_list+=" 72.Tcsh"
+	"72") final_list+=" 72.Tcsh"
 		shell
 		;;
-		"73") final_list+=" 73.Kcsh"
+	"73") final_list+=" 73.Kcsh"
 		shell
 		;;
-		*) echo "Wrong option.. Enter a valid one"
+	*) echo "Wrong option.. Enter a valid one"
 		shell
 		;;
-	esac
+esac
 }
 
 other_tools () {
@@ -232,19 +237,19 @@ other_tools () {
 	read -p "Enter options seperated by comma..(eg. 81,82) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"81") final_list+=" 81.Gimp"
+	"81") final_list+=" 81.Gimp"
 		other_tools
 		;;
-		"82") final_list+=" 82.ImageMagick"
+	"82") final_list+=" 82.ImageMagick"
 		other_tools
 		;;
-		"83") final_list+=" 83.ffmpeg"
+	"83") final_list+=" 83.ffmpeg"
 		other_tools
 		;;
-		*) echo "Wrong option.. Enter a valid one"
-			other_tools
+	*) echo "Wrong option.. Enter a valid one"
+		other_tools
 		;;
-	esac
+esac
 }
 
 browsers () {
@@ -256,19 +261,19 @@ browsers () {
 	read -p "Enter options seperated by comma..(eg. 91,92) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu
-		;;
+			;;
 		"91") final_list+=" 91.Firefox-dev"
-		browsers
-		;;
+			browsers
+			;;
 		"92") final_list+=" 92.GoogleChrome"
-		browsers
-		;;
+			browsers
+			;;
 		"93") final_list+=" Chromium"
-		browsers
-		;;
+			browsers
+			;;
 		*) echo "Wrong option.. Enter a valid one"
-		browsers
-		;;
+			browsers
+			;;
 	esac
 	current_list
 }
@@ -282,16 +287,16 @@ containers () {
 	read -p "Enter options seperated by comma..(eg. 101,102) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"101") final_list+=" 101.Docker"
+	"101") final_list+=" 101.Docker"
 		containers
 		;;
-		"102") final_list+=" 102.Vagrant"
+	"102") final_list+=" 102.Vagrant"
 		containers
 		;;
-		*) echo "Wrong option.. Enter a valid one"
+	*) echo "Wrong option.. Enter a valid one"
 		containers
 		;;
-	esac
+esac
 }
 
 oh_my_zsh () {
@@ -301,13 +306,13 @@ oh_my_zsh () {
 	read -p "Enter option(eg. 111) (0 to go to main menu).." OPTION
 	case "$OPTION" in
 		"0") main_menu;;
-		"111") final_list+=" 111.OhMyZsh"
-			main_menu
-			;;
-		*) echo "Wrong option.. Enter a valid one"
+	"111") final_list+=" 111.OhMyZsh"
+		main_menu
+		;;
+	*) echo "Wrong option.. Enter a valid one"
 		oh_my_zsh
 		;;	
-	esac
+esac
 }
 
 start_install () {
@@ -318,14 +323,14 @@ start_install () {
 	for i in $final_list; do
 		echo -e $i
 		if [ "$i" == "14.Rust" ]; then
-  			sudo apt-get update
-			sudo apt-get dist-upgrade -y
-			sudo apt-get install curl
+			brew update
+			brew install curl
 			curl -sSf https://static.rust-lang.org/rustup.sh | sh
 		elif [ "$i" == "11.Java" ]; then
-			sudo apt-add-repository ppa:webupd8team/java
-			sudo apt-get update
-			sudo apt-get install oracle-java8-installer
+			echo "Trying to install java"
+			brew update
+			brew tap caskroom/cask
+			brew install Caskroom/cask/java
 		elif [ "$i" == "13.Php" ]; then
 			sudo add-apt-repository ppa:eugenesan/ppa
 			sudo apt-get update
@@ -390,27 +395,27 @@ main_menu () {
 	read -p "Enter your choice[1-10]..., 00 to start installing.. " CHOICE
 	case "$CHOICE" in
 		"1") prog_lang
-		;;
+			;;
 		"2") frameworks
-		;;
+			;;
 		"3") text_editors
-		;;
+			;;
 		"4") version_control
-		;;
+			;;
 		"5") terminals
-		;;
+			;;
 		"6") databases
-		;;
+			;;
 		"7") shell
-		;;
+			;;
 		"8") other_tools
-		;;
+			;;
 		"9") browsers
-		;;
+			;;
 		"10") containers
-		;;
+			;;
 		"11") oh_my_zsh
-		;;
+			;;
 		"12")
 			exit
 			;;
@@ -422,9 +427,9 @@ main_menu () {
 				echo "#####Add some software to start installing..######"
 				main_menu
 			fi
-		;;
+			;;
 		*) echo "Wrong option.. Enter a valid one"
-		;;
+			;;
 	esac
 }
 
